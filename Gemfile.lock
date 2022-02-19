@@ -111,6 +111,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
+    nokogiri (1.13.1-x64-mingw32)
+      racc (~> 1.4)
     nokogiri (1.13.1-x86-mingw32)
       racc (~> 1.4)
     puma (5.5.2)
@@ -164,6 +166,7 @@ GEM
     zeitwerk (2.5.3)
 
 PLATFORMS
+  x64-mingw32
   x86-mingw32
 
 DEPENDENCIES
