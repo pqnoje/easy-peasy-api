@@ -4,11 +4,11 @@ class LoginController < ApplicationController
 	def authenticate_user
 		user = User.find_by(:username => params[:username], :password => params[:password])
 
-#begin
-#  decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
-#rescue JWT::ExpiredSignature
-#  # Handle expired token, e.g. logout user or deny access
-#end
+		#begin
+		#  decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
+		#rescue JWT::ExpiredSignature
+		#  # Handle expired token, e.g. logout user or deny access
+		#end
 
 		token = ''
 		unless user.nil?

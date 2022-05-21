@@ -1,4 +1,5 @@
 class ValuablesController < ApplicationController
+
     def index
         valuables = Valuable.all
         render json: valuables
@@ -16,18 +17,26 @@ class ValuablesController < ApplicationController
 
 	def save_basket
 		user = User.last
-		user.buyer.basket = Basket.new
-		params[:valuables].each do |valuable|
-			user.buyer.basket.valuables.push Valuable.find valuable[:id]
+		unless user.buyer.basket.nil? 
+			user.buyer.build_basket = Basket.create
 		end
-puts "!!!!!!!!!!"
-user.buyer.basket.valuables.each do |v|
-	puts v.title
-end
-		user.buyer.basket.save
-		user.buyer.save
+
+		params[:valuables].each do |valuable|
+			valuable = Valuable.find valuable[:id]
+			user.buyer.basket.valuables.push valuable
+		end
 		user.save
-user.buyer.basket.save
-		render json: user
+		render json: user.buyer.basket.valuables
 	end
+
+	def create
+		valuable = Valuable.new
+		valuable.images = params[:file]
+		valuable.title = params[:title]
+		valuable.description = params[:description]
+		valuable.value = params[:value]
+		valuable.save
+		render json: valuable
+	end
+
 end

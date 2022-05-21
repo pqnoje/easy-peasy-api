@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_184616) do
+ActiveRecord::Schema.define(version: 2022_03_16_033858) do
 
   create_table "baskets", force: :cascade do |t|
     t.integer "buyer_id", null: false
@@ -46,11 +46,16 @@ ActiveRecord::Schema.define(version: 2022_02_05_184616) do
     t.string "title"
     t.float "value"
     t.string "description"
+    t.string "images"
+    t.integer "basket_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "shop_status", default: false
+    t.string "attachment"
+    t.index ["basket_id"], name: "index_valuables_on_basket_id"
   end
 
   add_foreign_key "baskets", "buyers"
   add_foreign_key "users", "buyers"
+  add_foreign_key "valuables", "baskets"
 end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get '/valuables', to: 'valuables#index'
   get '/valuables/verify/:id', to: 'valuables#verify_disponibility'
-  put '/valuables/saveBasket', to: 'valuables#save_basket'
+  put '/basket', to: 'basket#save_basket'
 
   post '/login', to: 'login#authenticate_user'
   post '/logout', to: 'logout#terminate_session'
@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   put '/signup', to: 'signup#update'
   delete '/signup', to: 'signup#delete'
 
-  post '/authenticate', to: 'authentication#authenticate_jwt_token'
-  
+  post '/authenticate', to: 'authentication#validate_jwt_token'
   
   get '/checkout', to: 'checkout#finish'
+  post '/upload', to: 'valuables#create'
 end
