@@ -10,20 +10,15 @@ class LoginController < ApplicationController
 		#  # Handle expired token, e.g. logout user or deny access
 		#end
 
-		token = ''
 		unless user.nil?
 			hmac_secret = 'my$ecretK3y'
 			exp_payload = { data: ...user, exp: Time.now.to_i + 4 * 3600 }
 			token = JWT.encode exp_payload, hmac_secret, 'HS256'
-			self.save_user_session(user, token)
+			user.in_session = false
+			user.token = token
+			user.save
 		end
 		json_web_token = {'token' => token } 
 		render json: json_web_token
-	end
-
-	def save_user_session(user, token)
-		user.in_session = false
-		user.token = token
-		user.save
 	end
 end
